@@ -1,2 +1,2 @@
 # flagship
-App manager for you nodejs apps.
+App manager for your nodejs apps.
