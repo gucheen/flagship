@@ -1,0 +1,8 @@
+<md-list>
+  <h3 md-subheader>Folders</h3>
+  <md-list-item *ngFor="let app of apps">
+    <md-icon md-list-avatar>folder</md-icon>
+    <h4 md-line>{{app.name}}</h4>
+    <p md-line> {{app.description}} </p>
+  </md-list-item>
+</md-list>
