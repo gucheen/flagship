@@ -4,9 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import 'hammerjs';
 import { MaterialModule } from '@angular/material';
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 import { AppComponent } from './app.component';
 import { AppDetailComponent } from './app-detail/app-detail.component';
+
+import { DatabaseService } from './database.service';
 
 @NgModule({
   declarations: [
@@ -18,8 +21,11 @@ import { AppDetailComponent } from './app-detail/app-detail.component';
     FormsModule,
     HttpModule,
     MaterialModule.forRoot(),
+    FlexLayoutModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    DatabaseService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
