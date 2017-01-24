@@ -39,4 +39,11 @@ export class DatabaseService {
     });
   }
 
+  getSystem(id) {
+    return this.db.get(id)
+      .then(doc => {
+        return doc;
+      });
+  }
+
 }

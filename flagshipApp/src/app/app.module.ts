@@ -5,16 +5,22 @@ import { HttpModule } from '@angular/http';
 import 'hammerjs';
 import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { RouterModule } from '@angular/router';
 
-import { AppComponent } from './app.component';
-import { AppDetailComponent } from './app-detail/app-detail.component';
+import { appRoutes } from './router';
 
 import { DatabaseService } from './database.service';
+import { IpcService } from  './ipc.service';
+
+import { AppComponent } from './app.component';
+import { SystemListComponent } from './system-list/system-list.component';
+import { SystemDetailComponent } from './system-detail/system-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AppDetailComponent,
+    SystemListComponent,
+    SystemDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -22,9 +28,11 @@ import { DatabaseService } from './database.service';
     HttpModule,
     MaterialModule.forRoot(),
     FlexLayoutModule.forRoot(),
+    RouterModule.forRoot(appRoutes),
   ],
   providers: [
     DatabaseService,
+    IpcService,
   ],
   bootstrap: [AppComponent]
 })

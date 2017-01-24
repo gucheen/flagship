@@ -1,18 +1,17 @@
 import {
   Component,
-  OnInit
 } from '@angular/core';
 const PouchDB = require('pouchdb');
+
 import { System } from './system';
 import { DatabaseService } from './database.service';
-const electron = (<any>window).require('electron');
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   systems: System[] = [];
   db: any;
 
@@ -41,63 +40,5 @@ export class AppComponent implements OnInit {
       .then(result => {
         this.systems.push(result);
       });
-  }
-
-  updateSystem(system: System) {
-    this.database.updateSystem(system)
-      .then(doc => {
-        console.log(doc);
-
-        Object.assign(system, doc);
-      });
-  }
-
-  deleteSystem(system: System, index: number) {
-    this.database.deleteSystem(system)
-      .then(() => {
-        this.systems.splice(index, 1);
-      });
-  }
-
-  toggleApp(app) {
-    if (app.runing) {
-      return this.stopApp(app);
-    }
-    return this.startApp(app);
-  }
-
-  startApp(app) {
-    electron.ipcRenderer.send('startApp', app);
-
-    app.runing = true;
-
-    electron.ipcRenderer.on(`npmRun:stdout:${app.name}`, (event, args) => {
-      console.log(event, args);
-    });
-
-    electron.ipcRenderer.on(`npmRun:stderr:${app.name}`, (event, args) => {
-      console.log(event, args);
-    });
-
-    electron.ipcRenderer.on(`npmRun:exit:${app.name}`, (event, args) => {
-      console.log(event, args);
-    });
-  }
-
-  stopApp(app) {
-    electron.ipcRenderer.send('stopApp', app);
-
-    app.runing = false;
-  }
-
-  load() {
-    this.database.getAllSystems()
-      .then(docs => {
-        this.systems = docs.rows.map(row => row.doc);
-      });
-  }
-
-  ngOnInit() {
-    this.load();
   }
 }

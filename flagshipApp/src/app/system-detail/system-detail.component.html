@@ -1,0 +1,13 @@
+<h3>{{system.name}}</h3>
+<md-list>
+  <md-list-item *ngFor="let app of system.apps">
+    <md-icon md-list-avatar>computer</md-icon>
+    <h4 md-line>{{app.name}}</h4>
+    <p md-line> {{app.description}} </p>
+    <p md-line><strong>Location: </strong> {{app.location}} </p>
+    <p md-line><strong>Script: </strong> {{app.script}} </p>
+    <button md-icon-button (click)="toggleApp(app)" color="primary">
+      <md-icon>{{app.runing ? 'pause_circle_outline' : 'play_circle_outline'}}</md-icon>
+    </button>
+  </md-list-item>
+</md-list>
